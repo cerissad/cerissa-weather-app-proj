@@ -70,4 +70,4 @@ function enterCity(event) {
 }
 
 let form = document.querySelector("#city-input");
-form.addEventListener("submit", enterCity);
+form.addEventListener("click", enterCity);
