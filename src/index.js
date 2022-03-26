@@ -38,12 +38,12 @@ function showTemperature(response) {
   let mainDescription = document.querySelector("#weatherDescription");
   let mainTemp = document.querySelector("#mainTemp");
   let mainCity = document.querySelector("#city-header");
-  let humidityDetail = document.querySelector("#humidyDetail");
+  let humidityDetail = document.querySelector("#humidityDetail");
   let windSpeed = document.querySelector("#windSpeed");
   mainTemp.innerHTML = Math.round(response.data.main.temp);
   mainCity.innerHTML = response.data.name;
   mainDescription.innerHTML = response.data.weather[0].main;
-  //humidityDetail.innerHTML = response.data.main.humidity;
+  humidityDetail.innerHTML = response.data.main.humidity;
   windSpeed.innerHTML = Math.round(response.data.wind.speed);
 }
 
@@ -68,8 +68,12 @@ function enterCity(event) {
   function getTemperature(response) {
     let searchTemp = document.querySelector("#mainTemp");
     let cityDescr = document.querySelector("#weatherDescription");
+    humidityDetail = document.querySelector("#humidityDetail");
+    windSpeed = document.querySelector("#windSpeed");
     searchTemp.innerHTML = Math.round(response.data.main.temp);
     cityDescr.innerHTML = response.data.weather[0].main;
+    humidityDetail.innerHTML = response.data.main.humidity;
+    windSpeed.innerHTML = Math.round(response.data.wind.speed);
   }
 
   let searchURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&units=imperial&appid=${apiKey}`;
