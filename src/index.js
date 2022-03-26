@@ -25,28 +25,32 @@ todaysDate.innerHTML = `${day}, ${hours}:${minutes}`;
 
 let apiKey = "cfc5cad501ca51e328475f69bd6d7dd0";
 
-function showTemperature(response) {
-  let mainTemp = document.querySelector("#mainTemp");
-  let mainCity = document.querySelector("#city-header");
-  mainTemp.innerHTML = Math.round(response.data.main.temp);
-  mainCity.innerHTML = response.data.name;
-}
-
 function handlePosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let apiURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
-  console.log(axios.get(apiURL).then(showTemperature));
+  axios.get(apiURL).then(showTemperature);
 }
-navigator.geolocation.getCurrentPosition(handlePosition);
+
+function showTemperature(response) {
+  console.log(response.data);
+  //console.log(response.data.weather[0].main);
+  let mainDescription = document.querySelector("#weatherDescription");
+  let mainTemp = document.querySelector("#mainTemp");
+  let mainCity = document.querySelector("#city-header");
+  let humidityDetail = document.querySelector("#humidyDetail");
+  let windSpeed = document.querySelector("#windSpeed");
+  mainTemp.innerHTML = Math.round(response.data.main.temp);
+  mainCity.innerHTML = response.data.name;
+  mainDescription.innerHTML = response.data.weather[0].main;
+  //humidityDetail.innerHTML = response.data.main.humidity;
+  windSpeed.innerHTML = Math.round(response.data.wind.speed);
+}
 
 function getLoc() {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(handlePosition);
 }
-
-let button = document.querySelector("button");
-button.addEventListener("click", getLoc);
 
 function enterCity(event) {
   event.preventDefault();
@@ -63,11 +67,19 @@ function enterCity(event) {
 
   function getTemperature(response) {
     let searchTemp = document.querySelector("#mainTemp");
+    let cityDescr = document.querySelector("#weatherDescription");
     searchTemp.innerHTML = Math.round(response.data.main.temp);
+    cityDescr.innerHTML = response.data.weather[0].main;
   }
+
   let searchURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&units=imperial&appid=${apiKey}`;
   axios.get(searchURL).then(getTemperature);
 }
 
+let button = document.querySelector("button");
+button.addEventListener("click", getLoc);
+
 let form = document.querySelector("#city-input");
 form.addEventListener("submit", enterCity);
+
+navigator.geolocation.getCurrentPosition(handlePosition);
