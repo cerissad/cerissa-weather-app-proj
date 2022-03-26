@@ -45,11 +45,26 @@
 }
 
 .text-temp {
-  color: #825982;
+  color: #a8b1e3;
   font-weight: bold;
 }
 
 .more-weather {
   color: gray;
   font-size: 20px;
+}
+
+.main-temp a {
+  color: #a8b1e3;
+  text-decoration: none;
+}
+
+.main-temp .active {
+  color: lightgray;
+  cursor: default;
+}
+
+.main-temp .active:hover {
+  text-decoration: none;
+  color: blueviolet;
 }
