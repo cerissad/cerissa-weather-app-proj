@@ -116,7 +116,46 @@ function convertFah(event) {
   fahreinheit.setAttribute("class", null);
 }
 
+function displayForecast() {
+  let forecastInfo = document.querySelector("#forecast");
+
+  let days = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  let forecastHTML = `<div class="row">`;
+
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+      
+      <div class="col-2">
+              ${day}
+              
+              <div class="emoji-temp">
+                  ☁
+              </div>
+                  <div class="text-temp">
+                      Hi:43°F
+                      <br />
+                      Lo:39°F
+                  </div>
+                </div>
+    `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastInfo.innerHTML = forecastHTML;
+}
+
 navigator.geolocation.getCurrentPosition(handlePosition);
+displayForecast();
 
 let button = document.querySelector("button");
 button.addEventListener("click", getLoc);
