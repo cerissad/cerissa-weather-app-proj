@@ -106,8 +106,6 @@ function showTemperature(response) {
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}.png`
   );
-  celsius.setAttribute("class", "active");
-  fahreinheit.setAttribute("class", null);
 
   getForecast(response.data.coord);
 }
@@ -128,8 +126,6 @@ function enterCity(event) {
     }
 
     cityHeader.innerHTML = `${cityInput.value}`;
-    celsius.setAttribute("class", "active");
-    fahreinheit.setAttribute("class", null);
   }
 
   function getTemperature(response) {
@@ -156,24 +152,6 @@ function enterCity(event) {
   axios.get(searchURL).then(getTemperature);
 }
 
-function convertCel(event) {
-  event.preventDefault();
-  let celsiusTemp = (fahreinheitTemperature - 32) * 0.5556;
-  let mainTemp = document.querySelector("#mainTemp");
-  mainTemp.innerHTML = Math.round(celsiusTemp);
-  fahreinheit.setAttribute("class", "active");
-  celsius.setAttribute("class", null);
-}
-
-function convertFah(event) {
-  event.preventDefault();
-  let fahTemp = fahreinheitTemperature;
-  let mainTemp = document.querySelector("#mainTemp");
-  mainTemp.innerHTML = Math.round(fahTemp);
-  celsius.setAttribute("class", "active");
-  fahreinheit.setAttribute("class", null);
-}
-
 navigator.geolocation.getCurrentPosition(handlePosition);
 
 let button = document.querySelector("button");
@@ -181,9 +159,3 @@ button.addEventListener("click", getLoc);
 
 let form = document.querySelector("#city-input");
 form.addEventListener("submit", enterCity);
-
-let fahreinheitLink = document.querySelector("#fahreinheit");
-fahreinheitLink.addEventListener("click", convertFah);
-
-let celsiusLink = document.querySelector("#celsius");
-celsiusLink.addEventListener("click", convertCel);
