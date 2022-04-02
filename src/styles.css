@@ -27,7 +27,7 @@
 
 .main-emoji-temp {
   font-size: 40px;
-  color: #a8b1e3;
+  color: #2741d4;
 }
 
 .cityLinks {
@@ -49,18 +49,13 @@
 }
 
 .text-temp {
-  color: #a8b1e3;
+  color: #6f7fdd;
   font-weight: bold;
 }
 
 .more-weather {
   color: gray;
   font-size: 20px;
-}
-
-.main-temp a {
-  color: #a8b1e3;
-  text-decoration: none;
 }
 
 .weekly {
