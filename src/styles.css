@@ -21,13 +21,17 @@
 
 .main-temp {
   position: relative;
-  left: 500px;
+  left: 300px;
   top: -100px;
 }
 
 .main-emoji-temp {
   font-size: 40px;
   color: #a8b1e3;
+}
+
+.cityLinks {
+  padding: 20px;
 }
 
 .city {
@@ -57,14 +61,4 @@
 .main-temp a {
   color: #a8b1e3;
   text-decoration: none;
-}
-
-.main-temp .active {
-  color: lightgray;
-  cursor: default;
-}
-
-.main-temp .active:hover {
-  text-decoration: none;
-  color: blueviolet;
 }

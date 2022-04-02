@@ -115,6 +115,35 @@ function getLoc() {
   navigator.geolocation.getCurrentPosition(handlePosition);
 }
 
+function miamiWeather() {
+  event.preventDefault();
+  let firstCity = document.querySelector("#city-header");
+  firstCity.innerHTML = `Miami`;
+
+  function getTemperature(response) {
+    let searchTemp = document.querySelector("#mainTemp");
+    let cityDescr = document.querySelector("#weatherDescription");
+
+    fahreinheitTemperature = response.data.main.temp;
+
+    humidityDetail = document.querySelector("#humidityDetail");
+    windSpeed = document.querySelector("#windSpeed");
+    searchTemp.innerHTML = Math.round(response.data.main.temp);
+    cityDescr.innerHTML = response.data.weather[0].main;
+    humidityDetail.innerHTML = response.data.main.humidity;
+    windSpeed.innerHTML = Math.round(response.data.wind.speed);
+    weatherIcon.setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}.png`
+    );
+
+    getForecast(response.data.coord);
+  }
+
+  let searchURL = `https://api.openweathermap.org/data/2.5/weather?q=miami&units=imperial&appid=${apiKey}`;
+  axios.get(searchURL).then(getTemperature);
+}
+
 function enterCity(event) {
   event.preventDefault();
   let cityInput = document.querySelector("#city-text");
@@ -159,3 +188,6 @@ button.addEventListener("click", getLoc);
 
 let form = document.querySelector("#city-input");
 form.addEventListener("submit", enterCity);
+
+let thirdCity = document.querySelector("#miami");
+thirdCity.addEventListener("click", miamiWeather);
