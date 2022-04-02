@@ -115,10 +115,41 @@ function getLoc() {
   navigator.geolocation.getCurrentPosition(handlePosition);
 }
 
-function miamiWeather() {
+function chicagoWeather() {
   event.preventDefault();
   let firstCity = document.querySelector("#city-header");
-  firstCity.innerHTML = `Miami`;
+  firstCity.innerHTML = `Chicago`;
+
+  function getTemperature(response) {
+    let searchTemp = document.querySelector("#mainTemp");
+    let cityDescr = document.querySelector("#weatherDescription");
+
+    fahreinheitTemperature = response.data.main.temp;
+
+    humidityDetail = document.querySelector("#humidityDetail");
+    windSpeed = document.querySelector("#windSpeed");
+    searchTemp.innerHTML = Math.round(response.data.main.temp);
+    cityDescr.innerHTML = response.data.weather[0].main;
+    humidityDetail.innerHTML = response.data.main.humidity;
+    windSpeed.innerHTML = Math.round(response.data.wind.speed);
+    weatherIcon.setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}.png`
+    );
+
+    getForecast(response.data.coord);
+  }
+
+  let searchURL = `https://api.openweathermap.org/data/2.5/weather?q=chicago&units=imperial&appid=${apiKey}`;
+  axios.get(searchURL).then(getTemperature);
+
+  document.getElementById("city-input").reset();
+}
+
+function miamiWeather() {
+  event.preventDefault();
+  let secCity = document.querySelector("#city-header");
+  secCity.innerHTML = `Miami`;
 
   function getTemperature(response) {
     let searchTemp = document.querySelector("#mainTemp");
@@ -142,6 +173,70 @@ function miamiWeather() {
 
   let searchURL = `https://api.openweathermap.org/data/2.5/weather?q=miami&units=imperial&appid=${apiKey}`;
   axios.get(searchURL).then(getTemperature);
+
+  document.getElementById("city-input").reset();
+}
+
+function nyWeather() {
+  event.preventDefault();
+  let thirdCity = document.querySelector("#city-header");
+  thirdCity.innerHTML = `Manhattan`;
+
+  function getTemperature(response) {
+    let searchTemp = document.querySelector("#mainTemp");
+    let cityDescr = document.querySelector("#weatherDescription");
+
+    fahreinheitTemperature = response.data.main.temp;
+
+    humidityDetail = document.querySelector("#humidityDetail");
+    windSpeed = document.querySelector("#windSpeed");
+    searchTemp.innerHTML = Math.round(response.data.main.temp);
+    cityDescr.innerHTML = response.data.weather[0].main;
+    humidityDetail.innerHTML = response.data.main.humidity;
+    windSpeed.innerHTML = Math.round(response.data.wind.speed);
+    weatherIcon.setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}.png`
+    );
+
+    getForecast(response.data.coord);
+  }
+
+  let searchURL = `https://api.openweathermap.org/data/2.5/weather?q=manhattan&units=imperial&appid=${apiKey}`;
+  axios.get(searchURL).then(getTemperature);
+
+  document.getElementById("city-input").reset();
+}
+
+function manilaWeather() {
+  event.preventDefault();
+  let fourthCity = document.querySelector("#city-header");
+  fourthCity.innerHTML = `Manila`;
+
+  function getTemperature(response) {
+    let searchTemp = document.querySelector("#mainTemp");
+    let cityDescr = document.querySelector("#weatherDescription");
+
+    fahreinheitTemperature = response.data.main.temp;
+
+    humidityDetail = document.querySelector("#humidityDetail");
+    windSpeed = document.querySelector("#windSpeed");
+    searchTemp.innerHTML = Math.round(response.data.main.temp);
+    cityDescr.innerHTML = response.data.weather[0].main;
+    humidityDetail.innerHTML = response.data.main.humidity;
+    windSpeed.innerHTML = Math.round(response.data.wind.speed);
+    weatherIcon.setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}.png`
+    );
+
+    getForecast(response.data.coord);
+  }
+
+  let searchURL = `https://api.openweathermap.org/data/2.5/weather?q=manila&units=imperial&appid=${apiKey}`;
+  axios.get(searchURL).then(getTemperature);
+
+  document.getElementById("city-input").reset();
 }
 
 function enterCity(event) {
@@ -179,6 +274,8 @@ function enterCity(event) {
 
   let searchURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&units=imperial&appid=${apiKey}`;
   axios.get(searchURL).then(getTemperature);
+
+  document.getElementById("city-input").reset();
 }
 
 navigator.geolocation.getCurrentPosition(handlePosition);
@@ -189,5 +286,14 @@ button.addEventListener("click", getLoc);
 let form = document.querySelector("#city-input");
 form.addEventListener("submit", enterCity);
 
+let firstCity = document.querySelector("#chicago");
+firstCity.addEventListener("click", chicagoWeather);
+
+let secondCity = document.querySelector("#newYork");
+secondCity.addEventListener("click", nyWeather);
+
 let thirdCity = document.querySelector("#miami");
 thirdCity.addEventListener("click", miamiWeather);
+
+let fourthCity = document.querySelector("#manila");
+fourthCity.addEventListener("click", manilaWeather);
