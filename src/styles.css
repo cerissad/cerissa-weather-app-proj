@@ -62,3 +62,10 @@
   color: #a8b1e3;
   text-decoration: none;
 }
+
+.weekly {
+  text-align: center;
+  font-weight: bold;
+  text-decoration: underline;
+  padding: 30px;
+}
